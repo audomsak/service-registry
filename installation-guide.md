@@ -6,6 +6,16 @@ Well-defined API and schema definitions are essential to delivering robust micro
 
 This installation guide will show you how to install Red Hat® Integration - Service Registry on [Red Hat® OpenShift Container Platform](https://www.redhat.com/en/technologies/cloud-computing/openshift/container-platform) 4.8 and use PostgreSQL as a storage for the Service Registry. Though, [Red Hat® AMQ Streams](https://www.redhat.com/en/resources/amq-streams-datasheet) can also be used as a storage as well. See an offcial [Installing and Deploying Service Registry on OpenShift](https://access.redhat.com/documentation/en-us/red_hat_integration/2021.q3/html/installing_and_deploying_service_registry_on_openshift/index) document for more details.
 
+- [Red Hat® Integration - Service Registry installation guide](#red-hat-integration---service-registry-installation-guide)
+  - [Setting up a project](#setting-up-a-project)
+  - [PostgreSQL database deployment](#postgresql-database-deployment)
+    - [Installing Crunchy Postgres for Kubernetes operator from the OpenShift OperatorHub](#installing-crunchy-postgres-for-kubernetes-operator-from-the-openshift-operatorhub)
+    - [Deploying PostgreSQL database](#deploying-postgresql-database)
+  - [Red Hat Integration - Service Registry deployment](#red-hat-integration---service-registry-deployment)
+    - [Installing Service Registry from the OpenShift OperatorHub](#installing-service-registry-from-the-openshift-operatorhub)
+    - [Configuring Service Registry with PostgreSQL database storage](#configuring-service-registry-with-postgresql-database-storage)
+  - [Testing Service Registry via REST API](#testing-service-registry-via-rest-api)
+
 ## Setting up a project
 
 1. Log in to OpenShift web console using an account with cluster administrator privileges.

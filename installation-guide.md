@@ -14,7 +14,7 @@ This installation guide will show you how to install Red Hat® Integration - Ser
   - [Red Hat Integration - Service Registry deployment](#red-hat-integration---service-registry-deployment)
     - [Installing Service Registry from the OpenShift OperatorHub](#installing-service-registry-from-the-openshift-operatorhub)
     - [Configuring Service Registry with PostgreSQL database storage](#configuring-service-registry-with-postgresql-database-storage)
-  - [Testing Service Registry via REST API](#testing-service-registry-via-rest-api)
+  - [Testing Service Registry](#testing-service-registry)
     - [REST API testing using Postman](#rest-api-testing-using-postman)
     - [Performance testing using hey](#performance-testing-using-hey)
 
@@ -132,15 +132,15 @@ We're going to use PostgreSQL database as a storage for Service Registry so we n
 
    ![Deploying Service Registry](images/service-registry-deployment-8.png)
 
-## Testing Service Registry via REST API
+## Testing Service Registry
 
-Once you've finished setting the Service Registry, you might need to run a few tests/checks to make sure that everything is working as expected. Service Registry can be interacted with via 3 main channels/methods.
+Once you've finished setting up the Service Registry, you might need to run a few tests/checks to make sure that everything is working as expected. Service Registry can be interacted with via 3 main channels/methods.
 
 1. Web console
 2. REST API
 3. Client API (Programming)
 
-You've already seen how to access the web console in the previous steps. Now, we'll have a look how to interact with the Service Registry via REST APIs also a quick example of performance testing.
+You've already seen how to access the web console in the previous steps. Now, we'll have a look at how to interact with the Service Registry via REST APIs also a quick example of performance testing.
 
 ### REST API testing using Postman
 
@@ -180,6 +180,53 @@ Postman collection use environment to store some variables i.e. hostname, API, g
     $SERVICE_REGISTRY_BASE_URL/apis/registry/v2/groups/$SCHEMA_GROUP/artifacts
     ```
 
+    Sample output:
+
+    ```text
+    Summary:
+    Total:        2.4149 secs
+    Slowest:      0.2732 secs
+    Fastest:      0.0126 secs
+    Average:      0.1107 secs
+    Requests/sec: 414.0978
+
+    Total data:   261000 bytes
+    Size/request: 261 bytes
+
+    Response time histogram:
+    0.013 [1]     |
+    0.039 [68]    |■■■■■
+    0.065 [29]    |■■
+    0.091 [122]   |■■■■■■■■■
+    0.117 [534]   |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+    0.143 [58]    |■■■■
+    0.169 [9]     |■
+    0.195 [141]   |■■■■■■■■■■■
+    0.221 [35]    |■■■
+    0.247 [2]     |
+    0.273 [1]     |
+
+
+    Latency distribution:
+    10% in 0.0668 secs
+    25% in 0.0932 secs
+    50% in 0.1032 secs
+    75% in 0.1164 secs
+    90% in 0.1834 secs
+    95% in 0.1919 secs
+    99% in 0.2095 secs
+
+    Details (average, fastest, slowest):
+    DNS+dialup:   0.0003 secs, 0.0126 secs, 0.2732 secs
+    DNS-lookup:   0.0001 secs, 0.0000 secs, 0.0062 secs
+    req write:    0.0002 secs, 0.0000 secs, 0.0115 secs
+    resp wait:    0.1102 secs, 0.0125 secs, 0.2730 secs
+    resp read:    0.0001 secs, 0.0000 secs, 0.0009 secs
+
+    Status code distribution:
+    [200]   1000 responses
+    ```
+
 - Testing get artifact API.
 
   - Grab one of schema ID from the Service Registry web console and export as an environment variable.
@@ -191,6 +238,53 @@ Postman collection use environment to store some variables i.e. hostname, API, g
   - Run hey command to execute the test.
 
     ```sh
-    ./hey -n 1000 -c 100 \
+    ./hey -n 10000 -c 100 \
       -m GET $SERVICE_REGISTRY_BASE_URL/apis/registry/v2/groups/$SCHEMA_GROUP/artifacts/$SCHEMA_ID
+    ```
+
+    Sample output:
+
+    ```text
+    Summary:
+    Total:         8.9206 secs
+    Slowest:       0.3318 secs
+    Fastest:       0.0037 secs
+    Average:       0.0860 secs
+    Requests/sec:  1121.0042
+
+    Total data:    65910000 bytes
+    Size/request:  6591 bytes
+
+    Response time histogram:
+    0.004 [1]      |
+    0.037 [2194]   |■■■■■■■■■■■■■■■■■■
+    0.069 [84]     |■
+    0.102 [4878]   |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+    0.135 [2018]   |■■■■■■■■■■■■■■■■■
+    0.168 [9]      |
+    0.201 [741]    |■■■■■■
+    0.233 [61]     |■
+    0.266 [7]      |
+    0.299 [5]      |
+    0.332 [2]      |
+
+
+    Latency distribution:
+    10% in 0.0127 secs
+    25% in 0.0804 secs
+    50% in 0.0949 secs
+    75% in 0.1036 secs
+    90% in 0.1146 secs
+    95% in 0.1846 secs
+    99% in 0.1981 secs
+
+    Details (average, fastest, slowest):
+    DNS+dialup: 0.0001 secs, 0.0037 secs, 0.3318 secs
+    DNS-lookup: 0.0000 secs, 0.0000 secs, 0.0123 secs
+    req write:  0.0001 secs, 0.0000 secs, 0.0639 secs
+    resp wait:  0.0855 secs, 0.0036 secs, 0.3317 secs
+    resp read:  0.0003 secs, 0.0000 secs, 0.0983 secs
+
+    Status code distribution:
+    [200] 10000 responses
     ```

@@ -2,7 +2,6 @@ apiVersion: registry.apicur.io/v1
 kind: ApicurioRegistry
 metadata:
   name: service-registry
-  namespace: service-registry
 spec:
   configuration:
     persistence: sql

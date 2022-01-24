@@ -15,6 +15,8 @@ This installation guide will show you how to install Red Hat® Integration - Ser
     - [Installing Service Registry from the OpenShift OperatorHub](#installing-service-registry-from-the-openshift-operatorhub)
     - [Configuring Service Registry with PostgreSQL database storage](#configuring-service-registry-with-postgresql-database-storage)
   - [Testing Service Registry via REST API](#testing-service-registry-via-rest-api)
+    - [API testing using Postman](#api-testing-using-postman)
+    - [Performance testing using hey](#performance-testing-using-hey)
 
 ## Setting up a project
 
@@ -120,9 +122,9 @@ We're going to use PostgreSQL database as a storage for Service Registry so we n
 
 4. Switch to Developer perspective, then go to **Topology** menu. You should be able to see the Service Registry pod. Click on the arrow icon to open Service Registry web console.
 
-    ![Deploying Service Registry](images/service-registry-deployment-5.png)
+   ![Deploying Service Registry](images/service-registry-deployment-5.png)
 
-    ![Deploying Service Registry](images/service-registry-deployment-6.png)
+   ![Deploying Service Registry](images/service-registry-deployment-6.png)
 
 5. You can now start using the Service Registry via web console. However, Service Registry also can be interacted with using REST API. You can see the OpenAPI/Swagger specification by changing the URL to `/apis` as following screenshot.
 
@@ -134,9 +136,11 @@ We're going to use PostgreSQL database as a storage for Service Registry so we n
 
 Service Registry can be interacted with via 3 main methods:
 
-   1. Web console
-   2. REST API
-   3. Client API (Programming)
+1.  Web console
+2.  REST API
+3.  Client API (Programming)
+
+### API testing using Postman
 
 This guide has provide a [Postman](https://www.postman.com/) collection with some example of requests to interact with the Service Registry via REST API calls. You can import this [Postman collection](service-registry.postman_collection.json) and [Postman environment](service-registry.test.postman_environment.json) files to Postman application as explained in the Postman official guide [here](https://learning.postman.com/docs/getting-started/importing-and-exporting-data/).
 
@@ -145,3 +149,46 @@ This guide has provide a [Postman](https://www.postman.com/) collection with som
 Postman collection use environment to store some variables i.e. hostname, API, group etc. which are used in each request in the collection. So, once you've imported the collection and environment files, you need to update the `SERVICE_REGISTRY_HOST` and `GROUP` variables in the Postman environment as a screenshot below before testing the Service Registry.
 
 ![Postman](images/postman-2.png)
+
+### Performance testing using hey
+
+[hey](https://github.com/rakyll/hey) is a tiny program that sends some load to a web application. You can use it to run simple performance testing. Please check hey [usage manual](https://github.com/rakyll/hey#usage) for command line options.
+
+- Setup environment variables.
+
+  ```sh
+  export SERVICE_REGISTRY_BASE_URL="http://service-registry-service.test.svc:8080"
+  export SCHEMA_GROUP="performance-test"
+  ```
+
+  **_NOTE:_** The base URL in your cluster might be different than this. Also, if you're running hey outside the cluster then the base URL should be the same as Service Registry's route.
+
+- Testing create artifact API.
+
+  - Create a payload i.e. [json-schema.json](json-schema.json) file to be created in Service Registry.
+
+  - Run hey command to execute the test.
+
+    ```sh
+    ./hey -n 1000 -c 50 \
+    -m POST \
+    -D "json-schema.json" \
+    -T "application/json" \
+    -H "X-Registry-ArtifactType: JSON" \
+    $SERVICE_REGISTRY_BASE_URL/apis/registry/v2/groups/$SCHEMA_GROUP/artifacts
+    ```
+
+- Testing get artifact API.
+
+  - Grab one of schema ID from the Service Registry web console and export as an environment variable.
+
+    ```sh
+    export SCHEMA_ID="000427c8-080f-4300-9ea6-cb8aee64b922"
+    ```
+
+  - Run hey command to execute the test.
+
+    ```sh
+    ./hey -n 1000 -c 100 \
+      -m GET $SERVICE_REGISTRY_BASE_URL/apis/registry/v2/groups/$SCHEMA_GROUP/artifacts/$SCHEMA_ID
+    ```

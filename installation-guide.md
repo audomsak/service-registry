@@ -15,7 +15,7 @@ This installation guide will show you how to install Red Hat® Integration - Ser
     - [Installing Service Registry from the OpenShift OperatorHub](#installing-service-registry-from-the-openshift-operatorhub)
     - [Configuring Service Registry with PostgreSQL database storage](#configuring-service-registry-with-postgresql-database-storage)
   - [Testing Service Registry via REST API](#testing-service-registry-via-rest-api)
-    - [API testing using Postman](#api-testing-using-postman)
+    - [REST API testing using Postman](#rest-api-testing-using-postman)
     - [Performance testing using hey](#performance-testing-using-hey)
 
 ## Setting up a project
@@ -134,13 +134,15 @@ We're going to use PostgreSQL database as a storage for Service Registry so we n
 
 ## Testing Service Registry via REST API
 
-Service Registry can be interacted with via 3 main methods:
+Once you've finished setting the Service Registry, you might need to run a few tests/checks to make sure that everything is working as expected. Service Registry can be interacted with via 3 main channels/methods.
 
-1.  Web console
-2.  REST API
-3.  Client API (Programming)
+1. Web console
+2. REST API
+3. Client API (Programming)
 
-### API testing using Postman
+You've already seen how to access the web console in the previous steps. Now, we'll have a look how to interact with the Service Registry via REST APIs also a quick example of performance testing.
+
+### REST API testing using Postman
 
 This guide has provide a [Postman](https://www.postman.com/) collection with some example of requests to interact with the Service Registry via REST API calls. You can import the [Postman collection](service-registry.postman_collection.json) and [Postman environment](service-registry.test.postman_environment.json) files to Postman application as explained in the Postman official guide [here](https://learning.postman.com/docs/getting-started/importing-and-exporting-data/).
 

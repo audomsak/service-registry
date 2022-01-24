@@ -5,6 +5,22 @@ metadata:
 spec:
   backups:
     pgbackrest:
+      jobs:
+        resources:
+            requests:
+              cpu: 200m
+              memory: 1Gi
+            limits:
+              cpu: 1
+              memory: 4Gi
+      repoHost:
+        resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 2Gi
       repos:
         - name: repo1
           volume:
@@ -14,11 +30,6 @@ spec:
               resources:
                 requests:
                   storage: 2Gi
-                  cpu: 500m
-                  memory: 2Gi
-                limits:
-                  cpu: 1
-                  memory: 4Gi
   instances:
     - affinity:
         podAntiAffinity:
@@ -36,18 +47,26 @@ spec:
         resources:
           requests:
             storage: 2Gi
-            cpu: 500m
-            memory: 2Gi
-          limits:
-            cpu: 1
-            memory: 4Gi
       name: pgha1
       replicas: 3
+      resources:
+        requests:
+          storage: 2Gi
+          cpu: 500m
+          memory: 2Gi
+        limits:
+          cpu: 1
+          memory: 8Gi
   openshift: true
   port: 5432
   postgresVersion: 13
   proxy:
     pgBouncer:
+      config:
+        global:
+          pool_mode: transaction
+          max_client_conn: "100"
+          default_pool_size: "20"
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -61,12 +80,17 @@ spec:
       port: 5432
       replicas: 3
       resources:
-          requests:
-            cpu: 200m
-            memory: 512Mi
-          limits:
-            cpu: 500m
-            memory: 2Gi
+        requests:
+          cpu: 200m
+          memory: 512Mi
+        limits:
+          cpu: 500m
+          memory: 2Gi
+  patroni:
+    dynamicConfiguration:
+      postgresql:
+        parameters:
+          max_connections: "2000"
   users:
     - databases:
         - service-registry

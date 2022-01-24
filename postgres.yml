@@ -5,6 +5,22 @@ metadata:
 spec:
   backups:
     pgbackrest:
+      jobs:
+        resources:
+            requests:
+              cpu: 200m
+              memory: 1Gi
+            limits:
+              cpu: 1
+              memory: 4Gi
+      repoHost:
+        resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 2Gi
       repos:
         - name: repo1
           volume:
@@ -14,28 +30,30 @@ spec:
               resources:
                 requests:
                   storage: 2Gi
-                  cpu: 500m
-                  memory: 1Gi
-              limits:
-                cpu: 1
-                memory: 4Gi
   instances:
     - dataVolumeClaimSpec:
         accessModes:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 1Gi
-            cpu: 500m
-            memory: 2Gi
-          limits:
-            cpu: 1
-            memory: 4Gi
+            storage: 2Gi
+      resources:
+        requests:
+          cpu: 500m
+          memory: 2Gi
+        limits:
+          cpu: 1
+          memory: 4Gi
       name: instance1
-      replicas: 3
+      replicas: 1
   openshift: true
   port: 5432
   postgresVersion: 13
+  patroni:
+    dynamicConfiguration:
+      postgresql:
+        parameters:
+          max_connections: "2000"
   users:
     - databases:
         - service-registry

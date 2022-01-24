@@ -154,7 +154,7 @@ Postman collection use environment to store some variables i.e. hostname, API, g
 
 ### Performance testing using hey
 
-[hey](https://github.com/rakyll/hey) is a tiny program that sends some load to a web application. You can use it to run simple performance testing. Please check hey [usage manual](https://github.com/rakyll/hey#usage) for command line options.
+[**hey**](https://github.com/rakyll/hey) is a tiny program that sends some load to a web application. You can use it to run simple performance testing. Please check hey [usage manual](https://github.com/rakyll/hey#usage) for command line options.
 
 - Setup environment variables.
 
@@ -163,13 +163,13 @@ Postman collection use environment to store some variables i.e. hostname, API, g
   export SCHEMA_GROUP="performance-test"
   ```
 
-  **_NOTE:_** The base URL in your cluster might be different than this. Also, if you're running hey outside the cluster then the base URL should be the same as Service Registry's route.
+  **_NOTE:_** The base URL in your cluster might be different than this. Also, if you're running `hey` outside the cluster then the base URL should be the same as Service Registry's route.
 
 - Testing create artifact API.
 
-  - Create a payload i.e. [json-schema.json](json-schema.json) file to be created in Service Registry.
+  - Create a payload i.e. [json-schema.json](json-schema.json) file to be used for testing.
 
-  - Run hey command to execute the test.
+  - Run `hey` command to execute the test.
 
     ```sh
     ./hey -n 1000 -c 50 \
@@ -235,7 +235,7 @@ Postman collection use environment to store some variables i.e. hostname, API, g
     export SCHEMA_ID="000427c8-080f-4300-9ea6-cb8aee64b922"
     ```
 
-  - Run hey command to execute the test.
+  - Run `hey` command to execute the test.
 
     ```sh
     ./hey -n 10000 -c 100 \

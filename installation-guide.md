@@ -142,7 +142,7 @@ Service Registry can be interacted with via 3 main methods:
 
 ### API testing using Postman
 
-This guide has provide a [Postman](https://www.postman.com/) collection with some example of requests to interact with the Service Registry via REST API calls. You can import this [Postman collection](service-registry.postman_collection.json) and [Postman environment](service-registry.test.postman_environment.json) files to Postman application as explained in the Postman official guide [here](https://learning.postman.com/docs/getting-started/importing-and-exporting-data/).
+This guide has provide a [Postman](https://www.postman.com/) collection with some example of requests to interact with the Service Registry via REST API calls. You can import the [Postman collection](service-registry.postman_collection.json) and [Postman environment](service-registry.test.postman_environment.json) files to Postman application as explained in the Postman official guide [here](https://learning.postman.com/docs/getting-started/importing-and-exporting-data/).
 
 ![Postman](images/postman-1.png)
 

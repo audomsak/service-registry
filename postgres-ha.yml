@@ -14,6 +14,11 @@ spec:
               resources:
                 requests:
                   storage: 1Gi
+                  cpu: 500m
+                  memory: 2Gi
+                limits:
+                  cpu: 1
+                  memory: 4Gi
   instances:
     - affinity:
         podAntiAffinity:
@@ -31,6 +36,11 @@ spec:
         resources:
           requests:
             storage: 1Gi
+            cpu: 500m
+            memory: 2Gi
+          limits:
+            cpu: 1
+            memory: 4Gi
       name: pgha1
       replicas: 3
   openshift: true
@@ -50,6 +60,13 @@ spec:
               weight: 1
       port: 5432
       replicas: 3
+      resources:
+          requests:
+            cpu: 200m
+            memory: 512Mi
+          limits:
+            cpu: 500m
+            memory: 2Gi
   users:
     - databases:
         - service-registry

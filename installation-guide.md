@@ -4,7 +4,7 @@ Red Hat® Integration - Service Registry is a service that provides an API and s
 
 Well-defined API and schema definitions are essential to delivering robust microservice and event streaming architectures. Development teams can use a registry to manage these artifacts in various formats, including OpenAPI, AsyncAPI, Apache Avro, Protocol Buffers, and more. Data producers and consumers can then use the artifacts to validate and serialize or deserialize data.
 
-This installation guide will show you how to install Red Hat® Integration - Service Registry on [Red Hat® OpenShift Container Platform](https://www.redhat.com/en/technologies/cloud-computing/openshift/container-platform) 4.8 and use PostgreSQL as a storage for the Service Registry. Though, [Red Hat® AMQ Streams](https://www.redhat.com/en/resources/amq-streams-datasheet) can also be used as a storage as well. See an offcial [Installing and Deploying Service Registry on OpenShift](https://access.redhat.com/documentation/en-us/red_hat_integration/2021.q3/html/installing_and_deploying_service_registry_on_openshift/index) document for more details.
+This installation guide will show you how to install Red Hat® Integration - Service Registry on [Red Hat® OpenShift Container Platform](https://www.redhat.com/en/technologies/cloud-computing/openshift/container-platform) 4.8 and use PostgreSQL as a storage for the Service Registry. Though, [Red Hat® AMQ Streams](https://www.redhat.com/en/resources/amq-streams-datasheet) can also be used as a storage as well. Please check [offcial document](https://access.redhat.com/documentation/en-us/red_hat_integration/2021.q3/html/installing_and_deploying_service_registry_on_openshift/index) for more details.
 
 - [Red Hat® Integration - Service Registry installation guide](#red-hat-integration---service-registry-installation-guide)
   - [Setting up a project](#setting-up-a-project)
@@ -37,7 +37,7 @@ This installation guide will show you how to install Red Hat® Integration - Ser
 
 We're going to use PostgreSQL database as a storage for Service Registry so we need to setup the database first and make sure it's ready to use. There are plenty of options for PostgreSQL operators or containers that can be installed on OpenShift. You can use either commercial or community version that suites your environment and requirement. This guide will show you how to deploy PostgreSQL database using [Crunchy Postgres for Kubernetes operator](https://github.com/CrunchyData/postgres-operator).
 
-**_NOTE:_** You can use existing PostgreSQL database (if exists) or run your own PostgreSQL containers cluster without using the operator. Or you can use differnt operator from marketplace or opensource cummunity.
+**_NOTE:_** You can use existing PostgreSQL database (if exists) or run your own PostgreSQL containers cluster without using the operator. Or you can use differnt operator from marketplace or opensource community.
 
 ### Installing Crunchy Postgres for Kubernetes operator from the OpenShift OperatorHub
 
@@ -157,7 +157,7 @@ Postman collection uses environment to store some variables i.e. hostname, API, 
 
 ### Performance testing using hey
 
-[hey](https://github.com/rakyll/hey) is a tiny program that sends some load to a web application. You can use it to run simple performance testing. Please check hey [usage manual](https://github.com/rakyll/hey#usage) for command line options.
+[**hey**](https://github.com/rakyll/hey) is a tiny program that sends some load to a web application. You can use it to run simple performance testing. Please check hey [usage manual](https://github.com/rakyll/hey#usage) for command line options.
 
 - Setup environment variables.
 
@@ -166,13 +166,13 @@ Postman collection uses environment to store some variables i.e. hostname, API, 
   export SCHEMA_GROUP="performance-test"
   ```
 
-  **_NOTE:_** The base URL in your cluster might be different than this. Also, if you're running hey outside the cluster then the base URL should be the same as Service Registry's route.
+  **_NOTE:_** The base URL in your cluster might be different than this. Also, if you're running `hey` outside the cluster then the base URL should be the same as Service Registry's route.
 
 - Testing create artifact API.
 
-  - Create a payload i.e. [json-schema.json](manifest/json-schema.json) file to be created in Service Registry.
+  - Create a payload i.e. [json-schema.json](manifest/json-schema.json) file to be used for testing.
 
-  - Run hey command to execute the test.
+  - Run `hey` command to execute the test.
 
     ```sh
     ./hey -n 1000 -c 50 \
@@ -238,7 +238,7 @@ Postman collection uses environment to store some variables i.e. hostname, API, 
     export SCHEMA_ID="000427c8-080f-4300-9ea6-cb8aee64b922"
     ```
 
-  - Run hey command to execute the test.
+  - Run `hey` command to execute the test.
 
     ```sh
     ./hey -n 10000 -c 100 \

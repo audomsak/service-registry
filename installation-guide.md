@@ -371,4 +371,4 @@ Service Registry provides role-based authentication and authorization for the Se
 
 5. Select the **Registry** realm (or the realm you created in [the earlier step](#create-realm)), then click **Users** menu, and then click **View all users** button. You should be able to see a list of users as configured in YAML when you [created realm](#create-realm).
 
-   ![Realm setup](images/sso
+   ![Realm setup](images/sso-realm-setup-7.png)

@@ -300,7 +300,7 @@ Service Registry provides role-based authentication and authorization for the Se
 
 ### Installing Red Hat Single Sign-On Operator from the OpenShift OperatorHub
 
-1. Switch to **Administrator** view then go to **Operators** -> **OperatorHub** menu. Enter `sso` into the search box, the **Red Hat Integration - Single Sign-On Operator** will show up on the screen. Then click on it.
+1. Switch to **Administrator** view then go to **Operators** -> **OperatorHub** menu. Enter `sso` into the search box, the **Red Hat Single Sign-On Operator** will show up on the screen. Then click on it.
 
    ![SSO installation](images/sso-operator-installation-1.png)
 

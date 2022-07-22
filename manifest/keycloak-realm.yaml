@@ -24,7 +24,7 @@ spec:
           - '*'
         standardFlowEnabled: true
         webOrigins:
-          - '*'
+          - '+'
         publicClient: true
       - clientId: registry-client-api
         implicitFlowEnabled: true
@@ -32,7 +32,7 @@ spec:
           - '*'
         standardFlowEnabled: true
         webOrigins:
-          - '*'
+          - '+'
         publicClient: true
     users:
       - credentials:

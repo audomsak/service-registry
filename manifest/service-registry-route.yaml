@@ -1,0 +1,15 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: service-registry
+  labels:
+    app: service-registry
+spec:
+  host: registry-service-registry.apps.cluster-px4pm.px4pm.sandbox441.opentlc.com
+  to:
+    kind: Service
+    name: service-registry-service
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None

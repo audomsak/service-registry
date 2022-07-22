@@ -1,10 +1,10 @@
 # Red Hat® Integration - Service Registry installation guide
 
-Red Hat® Integration - Service Registry is a service that provides an API and schema registry for applications i.e. microservices. Service Registry makes it easy for development teams to publish, discover, and reuse APIs and schemas.
+**Red Hat® Integration - Service Registry** is a service that provides an API and schema registry for applications i.e. microservices. Service Registry makes it easy for development teams to publish, discover, and reuse APIs and schemas.
 
 Well-defined API and schema definitions are essential to delivering robust microservice and event streaming architectures. Development teams can use a registry to manage these artifacts in various formats, including OpenAPI, AsyncAPI, Apache Avro, Protocol Buffers, and more. Data producers and consumers can then use the artifacts to validate and serialize or deserialize data.
 
-This installation guide will show you how to install Red Hat® Integration - Service Registry on [Red Hat® OpenShift Container Platform](https://www.redhat.com/en/technologies/cloud-computing/openshift/container-platform) 4.8 and use PostgreSQL as a storage for the Service Registry. Though, [Red Hat® AMQ Streams](https://www.redhat.com/en/resources/amq-streams-datasheet) can also be used as a storage as well. Please check [offcial document](https://access.redhat.com/documentation/en-us/red_hat_integration/2021.q3/html/installing_and_deploying_service_registry_on_openshift/index) for more details.
+This installation guide will show you how to install **Red Hat® Integration - Service Registry** on [Red Hat® OpenShift Container Platform](https://www.redhat.com/en/technologies/cloud-computing/openshift/container-platform) **4.8** and use PostgreSQL as a storage for the Service Registry. Though, [Red Hat® AMQ Streams](https://www.redhat.com/en/resources/amq-streams-datasheet) can also be used as a storage as well. Please check [offcial document](https://access.redhat.com/documentation/en-us/red_hat_integration/2021.q3/html/installing_and_deploying_service_registry_on_openshift/index) for more details.
 
 - [Red Hat® Integration - Service Registry installation guide](#red-hat-integration---service-registry-installation-guide)
   - [Setting up a project](#setting-up-a-project)
@@ -20,7 +20,11 @@ This installation guide will show you how to install Red Hat® Integration - Ser
   - [Secure Service Registry using Red Hat Single Sign-On](#secure-service-registry-using-red-hat-single-sign-on)
     - [Installing Red Hat Single Sign-On Operator from the OpenShift OperatorHub](#installing-red-hat-single-sign-on-operator-from-the-openshift-operatorhub)
     - [Deploying Red Hat Single Sign-On (Keycloak)](#deploying-red-hat-single-sign-on-keycloak)
-    - [Create Realm](#create-realm)
+    - [Create Keycloak Realm for Service Registry](#create-keycloak-realm-for-service-registry)
+    - [Configuring Service Registry authentication and authorization with Red Hat Single Sign-On](#configuring-service-registry-authentication-and-authorization-with-red-hat-single-sign-on)
+      - [Service Registry without HTTPS (Possible but less secure)](#service-registry-without-https-possible-but-less-secure)
+      - [Service Registry with HTTPS (More secure and recommended)](#service-registry-with-https-more-secure-and-recommended)
+      - [Configuring Service Registry](#configuring-service-registry)
 
 ## Setting up a project
 
@@ -299,6 +303,8 @@ Service Registry provides authentication and authorization using Red Hat Single 
 
 Service Registry provides role-based authentication and authorization for the Service Registry web console and core REST API using Red Hat Single Sign-On. Service Registry also provides content-based authorization at the schema or API level, where only the artifact creator has write access. You can also configure an HTTPS connection to Service Registry from inside or outside an OpenShift cluster.
 
+More information please see [official document](https://access.redhat.com/documentation/en-us/red_hat_integration/2021.q3/html/installing_and_deploying_service_registry_on_openshift/securing-the-registry).
+
 ### Installing Red Hat Single Sign-On Operator from the OpenShift OperatorHub
 
 1. Switch to **Administrator** view then go to **Operators** -> **OperatorHub** menu. Enter `sso` into the search box, the **Red Hat Single Sign-On Operator** will show up on the screen. Then click on it.
@@ -316,6 +322,23 @@ Service Registry provides role-based authentication and authorization for the Se
 4. Wait until the operator gets installed successfully then click on **View Operator** button.
    ![SSO installation](images/sso-operator-installation-4.png)
    ![SSO installation](images/sso-operator-installation-5.png)
+
+5. Click on **Action -> Edit Subscription** menu to edit SSO subscription.
+
+   ![SSO installation](images/sso-operator-installation-12.png)
+
+6. Insert this snippet under the `spec` section to configure SSO Operator to use Red Hat Single Sign-On 7.5 instead of 7.6. Then Click on **Save** button.
+
+   ```yaml
+   config:
+    env:
+      - name: RELATED_IMAGE_RHSSO
+        value: 'registry.redhat.io/rh-sso-7/sso75-openshift-rhel8:7.5'
+   ```
+
+   ![SSO installation](images/sso-operator-installation-13.png)
+
+   **Note.** The reason we have to downgrade the version is becasue `'redirect_uri'` parameter used for logout is no longer supported in version 7.6 and the application has to change to use the `'post_logout_redirect_uri'` with `'id_token_hint'` parameters instead. However, the current version of Service Registry (to be precise, Apicurio) still uses the `'redirect_uri'` parameter. Even though you can enable backwards compatibility option `'legacy-logout-redirect-uri'` of OIDC login protocol in the Red Hat SSO server (Keycloak) configuration but the configuration attribute in Keycloak CRD is experimental feature and may be changed in the future with or without notice.
 
 ### Deploying Red Hat Single Sign-On (Keycloak)
 
@@ -343,7 +366,7 @@ Service Registry provides role-based authentication and authorization for the Se
 
    ![SSO installation](images/sso-operator-installation-11.png)
 
-### Create Realm
+### Create Keycloak Realm for Service Registry
 
 1. Switch to **Administrator** view then click **Installed Operators** and **Red Hat Single Sign-On Operator**, and click the Keycloak Realm tab, and then **Create KeycloakRealm** button to create a new realm.
 
@@ -351,9 +374,9 @@ Service Registry provides role-based authentication and authorization for the Se
 
    ![Realm setup](images/sso-realm-setup-2.png)
 
-2. Change to **YAML view** then copy the conent in [keycloak-realm.yaml](manifest/keycloak-realm.yaml) and past into the editor. Edit the realm name, redirectUris, webOrigins,username, password etc. values as you need. Then click on **Create** button.
+2. Change to **YAML view** then copy the conent in [keycloak-realm.yaml](manifest/keycloak-realm.yaml) and past into the editor. Edit the realm name, redirectUris, webOrigins, username, password etc. values as you need. Then click on **Create** button.
 
-   > You must customize this KeycloakRealm resource with values suitable for your environment if you are deploying to production i.e. **realm name, redirectUris, webOrigins,username, password** etc. You can also create and manage realms using the Red Hat Single Sign-On web console.
+   > You must customize this KeycloakRealm resource with values suitable for your environment if you are deploying to production i.e. **realm name, redirectUris, webOrigins, username, password** etc. You can also create and manage realms using the Red Hat Single Sign-On web console.
 
    ![Realm setup](images/sso-realm-setup-3.png)
 
@@ -369,6 +392,89 @@ Service Registry provides role-based authentication and authorization for the Se
 
    ![Realm setup](images/sso-realm-setup-6.png)
 
-5. Select the **Registry** realm (or the realm you created in [the earlier step](#create-realm)), then click **Users** menu, and then click **View all users** button. You should be able to see a list of users as configured in YAML when you [created realm](#create-realm).
+5. Select the **Registry** realm (or the realm you created in [the earlier step](#create-realm)), then click **Users** menu, and then click **View all users** button. You should be able to see a list of users as configured in YAML when you [created Keycloak realm](#create-keycloak-realm-for-service-registry).
 
    ![Realm setup](images/sso-realm-setup-7.png)
+
+### Configuring Service Registry authentication and authorization with Red Hat Single Sign-On
+
+#### Service Registry without HTTPS (Possible but less secure)
+
+By default, Service Registry is installed without HTTPS configured for its Route as a screenshot below. You can **OPTIONALLY** create new or update existing route with HTTPS following the steps in [this section](#service-registry-with-https-more-secure-and-recommended).
+
+![Service Registry Authn & Authz](images/service-registry-authn-authz-1.png)
+
+However, if you really don't want to enable HTTPS for Service Registry then you need to create an additional `Service` and `Ingress` without HTTPS configured for Red Hat SSO/Keycloak as well so Service Registry can talk to Keycloak via HTTP protocol. Follow these steps to create `Service` and `Ingress` for Keycloak.
+
+- To create a `Service`, go to **Networking -> Services** menu then click on **Create Service** button. Copy the content in [keycloak-service.yaml](manifest/keycloak-service.yaml) file and paste into the editor then click on **Create** button.
+
+   ![Service Registry Authn & Authz](images/service-registry-authn-authz-2.png)
+
+   ![Service Registry Authn & Authz](images/service-registry-authn-authz-3.png)
+
+- To create an `Ingress`, go to **Networking -> Ingresses** menu then click on **Create Ingress** button. Copy the content in [keycloak-ingress.yaml](manifest/keycloak-ingress.yaml) file and paste into the editor, then edit the `host` attribute value with this format `keycloak-http-<namespace>.apps.<cluster host>` i.e. `http://keycloak-http-service-registry.apps.cluster-px4pm.opentlc.com` and then click on **Create** button.
+
+   ![Service Registry Authn & Authz](images/service-registry-authn-authz-4.png)
+
+   ![Service Registry Authn & Authz](images/service-registry-authn-authz-5.png)
+
+- Go to **Networking -> Routes** menu you should be able to see a new HTTP Keycloak Route is automatically created. Then click on the URL link to open Red Hat SSO web console.
+
+   **Note.** Copy the URL displayed in web browser for later use when configuring Service Registy.
+
+   ![Service Registry Authn & Authz](images/service-registry-authn-authz-9.png)
+
+#### Service Registry with HTTPS (More secure and recommended)
+
+By default, Service Registry is installed without HTTPS configured for its Route as a screenshot below. You can create new or update existing route with HTTPS to expose an HTTPS edge-terminated route for connections from outside the OpenShift cluster.
+
+**Note.** In case you've configured Service Registry route with HTTPS then you can use the SSO's HTTPS route to configure Service Registry directly in the next step.
+
+1. Go to **Networking -> Routes** then click on **Create Route** button.
+
+   ![Service Registry Authn & Authz](images/service-registry-authn-authz-10.png)
+
+2. Click **Edit YAML** link. Then copy the content in [service-registry-route.yaml](manifest/service-registry-route.yaml) file and paste into the editor. Update the `host` attribute value in this format `registry-<namespace>.apps.<cluster host>` or whatever you need as long as it's valid DNS. Then click on **Create** button.
+
+   ![Service Registry Authn & Authz](images/service-registry-authn-authz-11.png)
+
+   ![Service Registry Authn & Authz](images/service-registry-authn-authz-12.png)
+
+3. A new Service Registry Route with HTTPS should be created. Click on the URL link to open Service Registry web console.
+
+   ![Service Registry Authn & Authz](images/service-registry-authn-authz-13.png)
+
+#### Configuring Service Registry
+
+1. Go to **Operators** -> **Installed Operators** menu, then select **Red Hat Integration - Service Registry Operator**. Click the **Apicurio Registry** tab, and then **service-registry** link to update Service Registry.
+
+   ![Service Registry Authn & Authz](images/service-registry-authn-authz-6.png)
+
+   ![Service Registry Authn & Authz](images/service-registry-authn-authz-7.png)
+
+2. Insert this snippet under the `configuration` section as a screenshot below.
+
+   ```yaml
+   security:
+      keycloak:
+         url: "https://keycloak-<namespace>.apps.<cluster host>/auth"
+         realm: "registry"
+   ```
+
+   Make sure you have edit the `url` value to be the same as Keycloak HTTP route (as you configured in `Ingress` in [this section](#service-registry-without-https-possible-but-less-secure)) or HTTPS route you've noted in the **step 5** in [this section](#deploying-red-hat-single-sign-on-keycloak).
+
+   Also update the `realm` attribute value as well if you changed to something else when you created a realm in the **step 2** in [this section](#create-keycloak-realm-for-service-registry).
+
+   ![Service Registry Authn & Authz](images/service-registry-authn-authz-8.png)
+
+3. Wait for a few minutes, the Service Registry Operator will rollout new pods with the configs. Then open the Service Registry web console URL created in [this section](#service-registry-with-https-more-secure-and-recommended), you will be directed to login page via Red Hat Single Sign-On.
+
+   Enter username and password configured in YAML when you created KeycloakRealm in [this section](#create-keycloak-realm-for-service-registry) for login.
+
+   ![Service Registry Authn & Authz](images/service-registry-authn-authz-13.png)
+
+   ![Service Registry Authn & Authz](images/service-registry-authn-authz-14.png)
+
+4. You should be able to log in to Service Registry web console also log out via user icon at the top right corner.
+
+   ![Service Registry Authn & Authz](images/service-registry-authn-authz-15.png)

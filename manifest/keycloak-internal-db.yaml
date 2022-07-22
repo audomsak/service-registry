@@ -11,6 +11,4 @@ spec:
     imagePullPolicy: Always
   postgresDeploymentSpec:
     imagePullPolicy: Always
-  podDisruptionBudget:
-    enabled: True
-  instances: 2
+  instances: 1

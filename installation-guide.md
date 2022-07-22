@@ -20,6 +20,7 @@ This installation guide will show you how to install Red Hat® Integration - Ser
   - [Secure Service Registry using Red Hat Single Sign-On](#secure-service-registry-using-red-hat-single-sign-on)
     - [Installing Red Hat Single Sign-On Operator from the OpenShift OperatorHub](#installing-red-hat-single-sign-on-operator-from-the-openshift-operatorhub)
     - [Deploying Red Hat Single Sign-On (Keycloak)](#deploying-red-hat-single-sign-on-keycloak)
+    - [Create Realm](#create-realm)
 
 ## Setting up a project
 
@@ -336,6 +337,38 @@ Service Registry provides role-based authentication and authorization for the Se
 
 5. Click on the arrow icon of Keyclock pod to open Keyclock web console.
 
+   **Note.** Copy the URL displayed in web browser for later use when configuring Service Registy.
+
    ![SSO installation](images/sso-operator-installation-10.png)
 
    ![SSO installation](images/sso-operator-installation-11.png)
+
+### Create Realm
+
+1. Switch to **Administrator** view then click **Installed Operators** and **Red Hat Single Sign-On Operator**, and click the Keycloak Realm tab, and then **Create KeycloakRealm** button to create a new realm.
+
+   ![Realm setup](images/sso-realm-setup-1.png)
+
+   ![Realm setup](images/sso-realm-setup-2.png)
+
+2. Change to **YAML view** then copy the conent in [keycloak-realm.yaml](manifest/keycloak-realm.yaml) and past into the editor. Edit the realm name, redirectUris, webOrigins,username, password etc. values as you need. Then click on **Create** button.
+
+   > You must customize this KeycloakRealm resource with values suitable for your environment if you are deploying to production i.e. **realm name, redirectUris, webOrigins,username, password** etc. You can also create and manage realms using the Red Hat Single Sign-On web console.
+
+   ![Realm setup](images/sso-realm-setup-3.png)
+
+3. Go to **Workloads -> Secrets** menu, look for `credential-keycloak` secret and click on it. Then click on **Reveal values** link to see Keycloak Admin username and password.
+
+   ![Realm setup](images/sso-realm-setup-4.png)
+
+   ![Realm setup](images/sso-realm-setup-5.png)
+
+4. Open Keycloak web console, click on **Administration Console** link. Then sign in with username and password from the previous step.
+
+   ![Realm setup](images/sso-operator-installation-11.png)
+
+   ![Realm setup](images/sso-realm-setup-6.png)
+
+5. Select the **Registry** realm (or the realm you created in [the earlier step](#create-realm)), then click **Users** menu, and then click **View all users** button. You should be able to see a list of users as configured in YAML when you [created realm](#create-realm).
+
+   ![Realm setup](images/sso

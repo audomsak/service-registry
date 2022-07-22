@@ -17,6 +17,9 @@ This installation guide will show you how to install Red Hat® Integration - Ser
   - [Testing Service Registry](#testing-service-registry)
     - [REST API testing using Postman](#rest-api-testing-using-postman)
     - [Performance testing using hey](#performance-testing-using-hey)
+  - [Secure Service Registry using Red Hat Single Sign-On](#secure-service-registry-using-red-hat-single-sign-on)
+    - [Installing Red Hat Single Sign-On Operator from the OpenShift OperatorHub](#installing-red-hat-single-sign-on-operator-from-the-openshift-operatorhub)
+    - [Deploying Red Hat Single Sign-On (Keycloak)](#deploying-red-hat-single-sign-on-keycloak)
 
 ## Setting up a project
 
@@ -66,7 +69,7 @@ We're going to use PostgreSQL database as a storage for Service Registry so we n
 
    ![Deploying PostgreSQL](images/postgres-deployment-2.png)
 
-3. Switch to **YAML view**, then copy all content in [postgres.yml](postgres.yml) (simple cluster) or [postgres-ha.yml](postgres-ha.yml) (HA and connections pooling cluster) file to the editor. Then click on **Create** button. The operator will create a PostgreSQL database cluster for you.
+3. Switch to **YAML view**, then copy all content in [postgres.yml](manifest/postgres.yml) (simple cluster) or [postgres-ha.yml](manifest/postgres-ha.yml) (HA and connections pooling cluster) file to the editor. Then click on **Create** button. The operator will create a PostgreSQL database cluster for you.
 
    ![Deploying PostgreSQL](images/postgres-deployment-3.png)
 
@@ -114,7 +117,7 @@ We're going to use PostgreSQL database as a storage for Service Registry so we n
 
    ![Deploying Service Registry](images/service-registry-deployment-2.png)
 
-3. Switch to **YAML view**, then copy all content in [apicurio.yml](apicurio.yml) file to the editor and update **username**, **password**, and **url** from the secret. Then click on **Create** button. The operator will deploy Service Registry for you.
+3. Switch to **YAML view**, then copy all content in [apicurio.yml](manifest/apicurio.yml) file to the editor and update **username**, **password**, and **url** from the secret. Then click on **Create** button. The operator will deploy Service Registry for you.
 
    ![Deploying Service Registry](images/service-registry-deployment-3.png)
 
@@ -144,11 +147,11 @@ You've already seen how to access the web console in the previous steps. Now, we
 
 ### REST API testing using Postman
 
-This guide has provide a [Postman](https://www.postman.com/) collection with some example of requests to interact with the Service Registry via REST API calls. You can import the [Postman collection](service-registry.postman_collection.json) and [Postman environment](service-registry.test.postman_environment.json) files to Postman application as explained in the Postman official guide [here](https://learning.postman.com/docs/getting-started/importing-and-exporting-data/).
+This guide has provided a [Postman](https://www.postman.com/) collection with some example of requests to interact with the Service Registry via REST API calls. You can import the [Postman collection](postman/service-registry.postman_collection.json) and [Postman environment](postman/service-registry.test.postman_environment.json) files to Postman application as explained in the Postman official guide [here](https://learning.postman.com/docs/getting-started/importing-and-exporting-data/).
 
 ![Postman](images/postman-1.png)
 
-Postman collection use environment to store some variables i.e. hostname, API, group etc. which are used in each request in the collection. So, once you've imported the collection and environment files, you need to update the `SERVICE_REGISTRY_HOST` and `GROUP` variables in the Postman environment as a screenshot below before testing the Service Registry.
+Postman collection uses environment to store some variables i.e. hostname, API, group etc. which are used by each request in the collection. So, once you've imported the collection and environment files, you need to update the `SERVICE_REGISTRY_HOST` and `GROUP` variables in the Postman environment as a screenshot below before testing the Service Registry.
 
 ![Postman](images/postman-2.png)
 
@@ -167,7 +170,7 @@ Postman collection use environment to store some variables i.e. hostname, API, g
 
 - Testing create artifact API.
 
-  - Create a payload i.e. [json-schema.json](json-schema.json) file to be created in Service Registry.
+  - Create a payload i.e. [json-schema.json](manifest/json-schema.json) file to be created in Service Registry.
 
   - Run hey command to execute the test.
 
@@ -288,3 +291,51 @@ Postman collection use environment to store some variables i.e. hostname, API, g
     Status code distribution:
     [200] 10000 responses
     ```
+
+## Secure Service Registry using Red Hat Single Sign-On
+
+Service Registry provides authentication and authorization using Red Hat Single Sign-On based on OpenID Connect (OIDC) or HTTP basic. You can configure the required settings automatically using the Red Hat Single Sign-On Operator, or manually configure them in Red Hat Single Sign-On and Service Registry.
+
+Service Registry provides role-based authentication and authorization for the Service Registry web console and core REST API using Red Hat Single Sign-On. Service Registry also provides content-based authorization at the schema or API level, where only the artifact creator has write access. You can also configure an HTTPS connection to Service Registry from inside or outside an OpenShift cluster.
+
+### Installing Red Hat Single Sign-On Operator from the OpenShift OperatorHub
+
+1. Switch to **Administrator** view then go to **Operators** -> **OperatorHub** menu. Enter `sso` into the search box, the **Red Hat Integration - Single Sign-On Operator** will show up on the screen. Then click on it.
+
+   ![SSO installation](images/sso-operator-installation-1.png)
+
+2. A panel with details of the operator will show up on the right. Then click **Install** button.
+
+   ![SSO installation](images/sso-operator-installation-2.png)
+
+3. You can leave all options as default or change them if needed i.e. install the operator to the project you've created earlier. Then click **Install** button.
+
+   ![SSO installation](images/sso-operator-installation-3.png)
+
+4. Wait until the operator gets installed successfully then click on **View Operator** button.
+   ![SSO installation](images/sso-operator-installation-4.png)
+   ![SSO installation](images/sso-operator-installation-5.png)
+
+### Deploying Red Hat Single Sign-On (Keycloak)
+
+1. Click on **Create instance** link in the **Keycloak** widget.
+
+   ![SSO installation](images/sso-operator-installation-6.png)
+
+2. Switch to **YAML view** then copy the content from [keycloak-internal-db.yaml](manifest/keycloak-internal-db.yaml) file and paste into the editor. And then click on **Create** button.
+
+   ![SSO installation](images/sso-operator-installation-7.png)
+
+3. A new Keycloak instance should be shown up. Then switch back to **Developer** view.
+
+   ![SSO installation](images/sso-operator-installation-8.png)
+
+4. Go to **Topology** menu and wait until Keycloak pods are up and running.
+
+   ![SSO installation](images/sso-operator-installation-9.png)
+
+5. Click on the arrow icon of Keyclock pod to open Keyclock web console.
+
+   ![SSO installation](images/sso-operator-installation-10.png)
+
+   ![SSO installation](images/sso-operator-installation-11.png)

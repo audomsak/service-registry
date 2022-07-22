@@ -1,0 +1,16 @@
+apiVersion: keycloak.org/v1alpha1
+kind: Keycloak
+metadata:
+  name: keycloak
+  labels:
+    app: sso
+spec:
+  externalDatabase:
+    enabled: true
+  externalAccess:
+    enabled: true
+  keycloakDeploymentSpec:
+    imagePullPolicy: Always
+  podDisruptionBudget:
+    enabled: True
+  instances: 2

@@ -25,6 +25,7 @@ This installation guide will show you how to install **Red Hat® Integration - S
       - [Service Registry without HTTPS (Possible but less secure)](#service-registry-without-https-possible-but-less-secure)
       - [Service Registry with HTTPS (More secure and recommended)](#service-registry-with-https-more-secure-and-recommended)
       - [Configuring Service Registry](#configuring-service-registry)
+  - [References](#references)
 
 ## Setting up a project
 
@@ -127,6 +128,20 @@ We're going to use PostgreSQL database as a storage for Service Registry so we n
    ![Deploying Service Registry](images/service-registry-deployment-3.png)
 
    ![Deploying Service Registry](images/service-registry-deployment-4.png)
+
+   You can also customize URL of the Service Registry by adding a `host` element under the `deployment` element like the snippet below. The URL will be used to configure Route object.
+
+   ```yaml
+   spec:
+      configuration:
+         persistence: sql
+         sql:
+            ....
+            ....
+      deployment:
+         host: service-registry.example.com
+         replicas: 1
+   ```
 
 4. Switch to Developer perspective, then go to **Topology** menu. You should be able to see the Service Registry pod. Click on the arrow icon to open Service Registry web console.
 
@@ -478,3 +493,11 @@ By default, Service Registry is installed without HTTPS configured for its Route
 4. You should be able to log in to Service Registry web console also log out via user icon at the top right corner.
 
    ![Service Registry Authn & Authz](images/service-registry-authn-authz-15.png)
+
+## References
+
+- [Crunchy Postgres Operator CRD Reference](https://access.crunchydata.com/documentation/postgres-operator/v5/references/crd/)
+
+- [Red Hat Service Registry (Apicurio) Operator CRD Reference](https://www.apicur.io/registry/docs/apicurio-registry-operator/1.0.0/assembly-operator-configuration.html)
+
+- [Red Hat Single Sign-On (Keycloak) Operator CRD Reference](https://github.com/keycloak/keycloak-operator#supported-custom-resources)

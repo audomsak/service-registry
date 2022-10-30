@@ -22,6 +22,15 @@
 
 ## Securing Service Registry
 
+- [Securing Service Registry](security/security-0.md)
+
+- [Red Hat Single Sign-On deployment](security/security-1.md)
+  - [Installing Red Hat Single Sign-On Operator](security/security-2.md)
+  - [Deploy Red Hat Single Sign-On](security/security-3.md)
+  - [Create Keycloak Realm for Service Registry](security/security-4.md)
+
+- [Configuring Service Registry]
+
 ## Client Application
 
 - [References](reference.md)

@@ -2,11 +2,11 @@
 
 ## Installation
 
-- [Setting up a project](documents/installation/project-setup.md)
+- [Setting up a project](installation/project-setup.md)
 
-- [PostgreSQL database deployment](documents/installation/postgresql-setup-1.md)
-  - [Install Crunchy Postgres for Kubernetes operator](documents/installation/postgresql-setup-2.md)
-  - [Deploy PostgreSQL database](documents/installation/postgresql-setup-3.md)
+- [PostgreSQL database deployment](installation/postgresql-setup-1.md)
+  - [Install Crunchy Postgres for Kubernetes operator](installation/postgresql-setup-2.md)
+  - [Deploy PostgreSQL database](installation/postgresql-setup-3.md)
 
 ## Testing
 

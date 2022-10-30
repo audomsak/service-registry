@@ -1,5 +1,7 @@
 # Summary​
 
+Red Hat® Integration - Service Registry
+
 ## Installation
 
 - [Setting up a project](documents/installation/project-setup.md)

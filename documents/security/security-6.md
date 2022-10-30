@@ -8,7 +8,7 @@ By default, Service Registry is installed without HTTPS configured for its Route
 
    ![Service Registry Authn & Authz](../../images/service-registry-authn-authz-10.png)
 
-2. Click **Edit YAML** link. Then copy the content in [service-registry-route.yaml](../../manifest/service-registry-route.yaml) file and paste into the editor. Update the `host` attribute value in this format `registry-<namespace>.apps.<cluster host>` or whatever you need as long as it's valid DNS. Then click on **Create** button.
+2. Click **Edit YAML** link. Then copy the content in [service-registry-route.yaml](../../manifest/service-registry-route.yaml) file and paste into the editor. Update the `host` attribute value in this format `registry-<NAMESPACE>.apps.<CLUSTER_DOMAIN>` or whatever you need as long as it's valid DNS. Then click on **Create** button.
 
    ![Service Registry Authn & Authz](../../images/service-registry-authn-authz-11.png)
 

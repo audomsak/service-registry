@@ -12,7 +12,7 @@ However, if you really don't want to enable HTTPS for Service Registry then you 
 
    ![Service Registry Authn & Authz](../../images/service-registry-authn-authz-3.png)
 
-- To create an `Ingress`, go to **Networking -> Ingresses** menu then click on **Create Ingress** button. Copy the content in [keycloak-ingress.yaml](../../manifest/keycloak-ingress.yaml) file and paste into the editor, then edit the `host` attribute value with this format `keycloak-http-<namespace>.apps.<cluster host>` i.e. `http://keycloak-http-service-registry.apps.cluster-px4pm.opentlc.com` and then click on **Create** button.
+- To create an `Ingress`, go to **Networking -> Ingresses** menu then click on **Create Ingress** button. Copy the content in [keycloak-ingress.yaml](../../manifest/keycloak-ingress.yaml) file and paste into the editor, then edit the `host` attribute value with this format `keycloak-http-<NAMESPACE>.apps.<CLUSTER_DOMAIN>` i.e. `http://keycloak-http-service-registry.apps.cluster-px4pm.opentlc.com` and then click on **Create** button.
 
    ![Service Registry Authn & Authz](../../images/service-registry-authn-authz-4.png)
 

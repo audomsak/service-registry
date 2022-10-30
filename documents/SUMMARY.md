@@ -4,7 +4,7 @@
 
 ## Installation
 
-- [Setting up a project](installation/project-setup.md)
+- [Setting up project](installation/project-setup.md)
 
 - [PostgreSQL database deployment](installation/postgresql-setup-1.md)
   - [Install Crunchy Postgres for Kubernetes operator](installation/postgresql-setup-2.md)

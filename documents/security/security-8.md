@@ -11,7 +11,7 @@
    ```yaml
    security:
       keycloak:
-         url: "https://keycloak-<namespace>.apps.<cluster host>/auth"
+         url: "https://keycloak-<NAMESPACE>.apps.<CLUSTER_DOMAIN>/auth"
          realm: "registry"
    ```
 

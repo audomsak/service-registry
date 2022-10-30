@@ -1,5 +1,5 @@
 root: ./documents/
 
 ​structure:
-  #readme: README.md
+  readme: welcome.md
   #summary: SUMMARY.md​

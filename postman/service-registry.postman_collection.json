@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "bd6957fb-cbbc-4c64-a097-a904538aab98",
+		"_postman_id": "46873baa-67f0-42ba-8e89-f6bc123854c8",
 		"name": "Red Hat Integration Service Registry",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2703883"
 	},
 	"item": [
 		{
@@ -239,6 +240,126 @@
 				"url": {
 					"raw": "http://{{SERVICE_REGISTRY_HOST}}/{{SERVICE_REGISTRY_API}}/groups/{{GROUP}}/artifacts",
 					"protocol": "http",
+					"host": [
+						"{{SERVICE_REGISTRY_HOST}}"
+					],
+					"path": [
+						"{{SERVICE_REGISTRY_API}}",
+						"groups",
+						"{{GROUP}}",
+						"artifacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Basic Authentication - Create artifact",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "32e5e249-8431-4774-bf9a-02a6aeb9ed93",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "test-kafka-registry",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\n  \"additionalProperties\": false,\n  \"properties\": {\n    \"nc:Vehicle\": {\n      \"description\": \"A conveyance designed to carry an operator, passengers and/or cargo, over land.\",\n      \"oneOf\": [\n        {\n          \"$ref\": \"#/definitions/nc:VehicleType\"\n        },\n        {\n          \"type\": \"array\",\n          \"items\": {\n            \"$ref\": \"#/definitions/nc:VehicleType\"\n          }\n        }\n      ]\n    },\n    \"nc:VehicleAxleQuantity\": {\n      \"description\": \"A count of common axles of rotation of one or more wheels of a vehicle, whether power driven or freely rotating.\",\n      \"oneOf\": [\n        {\n          \"$ref\": \"#/definitions/niem-xs:nonNegativeInteger\"\n        },\n        {\n          \"type\": \"array\",\n          \"items\": {\n            \"$ref\": \"#/definitions/niem-xs:nonNegativeInteger\"\n          }\n        }\n      ]\n    },\n    \"nc:VehicleMSRPAmount\": {\n      \"description\": \"A manufacturer's suggested retail price of a vehicle; a price at which a manufacturer recommends a vehicle be sold.\",\n      \"oneOf\": [\n        {\n          \"$ref\": \"#/definitions/nc:AmountType\"\n        },\n        {\n          \"type\": \"array\",\n          \"items\": {\n            \"$ref\": \"#/definitions/nc:AmountType\"\n          }\n        }\n      ]\n    },\n    \"nc:Amount\": {\n      \"description\": \"An amount of money.\",\n      \"oneOf\": [\n        {\n          \"$ref\": \"#/definitions/niem-xs:decimal\"\n        },\n        {\n          \"type\": \"array\",\n          \"items\": {\n            \"$ref\": \"#/definitions/niem-xs:decimal\"\n          }\n        }\n      ]\n    },\n    \"nc:Currency\": {\n      \"description\": \"A data concept for a unit of money or exchange.\",\n      \"oneOf\": [\n        {\n          \"anyOf\": [\n            {\n              \"$ref\": \"#/properties/nc:CurrencyCode\"\n            }\n          ]\n        },\n        {\n          \"type\": \"array\",\n          \"items\": {\n            \"anyOf\": [\n              {\n                \"$ref\": \"#/properties/nc:CurrencyCode\"\n              }\n            ]\n          }\n        }\n      ]\n    },\n    \"nc:CurrencyCode\": {\n      \"description\": \"A unit of money or exchange.\",\n      \"oneOf\": [\n        {\n          \"$ref\": \"#/definitions/iso_4217:CurrencyCodeType\"\n        },\n        {\n          \"type\": \"array\",\n          \"items\": {\n            \"$ref\": \"#/definitions/iso_4217:CurrencyCodeType\"\n          }\n        }\n      ]\n    },\n    \"nc:VehicleIdentification\": {\n      \"description\": \"A unique identification for a specific vehicle.\",\n      \"oneOf\": [\n        {\n          \"$ref\": \"#/definitions/nc:IdentificationType\"\n        },\n        {\n          \"type\": \"array\",\n          \"items\": {\n            \"$ref\": \"#/definitions/nc:IdentificationType\"\n          }\n        }\n      ]\n    },\n    \"nc:IdentificationID\": {\n      \"description\": \"An identifier.\",\n      \"oneOf\": [\n        {\n          \"$ref\": \"#/definitions/niem-xs:string\"\n        },\n        {\n          \"type\": \"array\",\n          \"items\": {\n            \"$ref\": \"#/definitions/niem-xs:string\"\n          }\n        }\n      ]\n    }\n  },\n  \"definitions\": {\n    \"nc:VehicleType\": {\n      \"description\": \"A data type for a conveyance designed to carry an operator, passengers and/or cargo, over land.\",\n      \"allOf\": [\n        {\n          \"$ref\": \"#/definitions/nc:ConveyanceType\"\n        },\n        {\n          \"type\": \"object\",\n          \"properties\": {\n            \"nc:VehicleAxleQuantity\": {\n              \"$ref\": \"#/properties/nc:VehicleAxleQuantity\"\n            },\n            \"nc:VehicleIdentification\": {\n              \"$ref\": \"#/properties/nc:VehicleIdentification\"\n            },\n            \"nc:VehicleMSRPAmount\": {\n              \"$ref\": \"#/properties/nc:VehicleMSRPAmount\"\n            }\n          }\n        }\n      ]\n    },\n    \"nc:ConveyanceType\": {\n      \"description\": \"A data type for a means of transport from place to place.\",\n      \"allOf\": [\n        {\n          \"$ref\": \"#/definitions/_base\"\n        },\n        {\n          \"$ref\": \"#/definitions/nc:ItemType\"\n        },\n        {\n          \"type\": \"object\",\n          \"properties\": {}\n        }\n      ]\n    },\n    \"nc:ItemType\": {\n      \"description\": \"A data type for an article or thing.\",\n      \"allOf\": [\n        {\n          \"$ref\": \"#/definitions/_base\"\n        },\n        {\n          \"type\": \"object\",\n          \"properties\": {}\n        }\n      ]\n    },\n    \"nc:AmountType\": {\n      \"description\": \"A data type for an amount of money.\",\n      \"type\": \"object\",\n      \"properties\": {\n        \"nc:Amount\": {\n          \"$ref\": \"#/properties/nc:Amount\"\n        },\n        \"nc:Currency\": {\n          \"$ref\": \"#/properties/nc:Currency\"\n        }\n      }\n    },\n    \"iso_4217:CurrencyCodeType\": {\n      \"description\": \"A data type for a currency that qualifies a monetary amount.\",\n      \"oneOf\": [\n        {\n          \"$ref\": \"#/definitions/iso_4217:CurrencyCodeSimpleType\"\n        },\n        {\n          \"type\": \"object\",\n          \"properties\": {\n            \"rdf:value\": {\n              \"$ref\": \"#/definitions/iso_4217:CurrencyCodeSimpleType\"\n            }\n          }\n        }\n      ]\n    },\n    \"iso_4217:CurrencyCodeSimpleType\": {\n      \"type\": \"string\",\n      \"description\": \"A data type for a currency that qualifies a monetary amount.\",\n      \"oneOf\": [\n        {\n          \"enum\": [\n            \"EUR\"\n          ],\n          \"description\": \"Euro\"\n        },\n        {\n          \"enum\": [\n            \"GBP\"\n          ],\n          \"description\": \"Pound Sterling\"\n        },\n        {\n          \"enum\": [\n            \"USD\"\n          ],\n          \"description\": \"US Dollar\"\n        }\n      ]\n    },\n    \"nc:IdentificationType\": {\n      \"description\": \"A data type for a representation of an identity.\",\n      \"type\": \"object\",\n      \"properties\": {\n        \"nc:IdentificationID\": {\n          \"$ref\": \"#/properties/nc:IdentificationID\"\n        }\n      }\n    },\n    \"niem-xs:decimal\": {\n      \"description\": \"A data type for arbitrary precision decimal numbers.\",\n      \"type\": \"number\"\n    },\n    \"niem-xs:nonNegativeInteger\": {\n      \"description\": \"A data type for an integer with a minimum value of 0.\",\n      \"type\": \"number\"\n    },\n    \"niem-xs:string\": {\n      \"description\": \"A data type for character strings in XML.\",\n      \"type\": \"string\"\n    },\n    \"_base\": {\n      \"type\": \"object\",\n      \"patternProperties\": {\n        \"^ism:.*\": {\n          \"type\": \"string\"\n        },\n        \"^ntk:.*\": {\n          \"type\": \"string\"\n        }\n      },\n      \"properties\": {\n        \"@id\": {\n          \"format\": \"uriref\"\n        },\n        \"@base\": {\n          \"format\": \"uriref\"\n        }\n      }\n    }\n  }\n}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{SERVICE_REGISTRY_HOST}}/{{SERVICE_REGISTRY_API}}/groups/{{GROUP}}/artifacts",
+					"protocol": "https",
+					"host": [
+						"{{SERVICE_REGISTRY_HOST}}"
+					],
+					"path": [
+						"{{SERVICE_REGISTRY_API}}",
+						"groups",
+						"{{GROUP}}",
+						"artifacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OAuth - Create artifact",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "https://keycloak-service-registry.apps.cluster-qmkwt.qmkwt.sandbox19.opentlc.com/auth/realms/registry/protocol/openid-connect/token",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "32e5e249-8431-4774-bf9a-02a6aeb9ed93",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "test-kafka-registry",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "useBrowser",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "authUrl",
+							"value": "https://keycloak-sso.{{cluster-domain}}/auth/realms/example/protocol/openid-connect/auth",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\n  \"additionalProperties\": false,\n  \"properties\": {\n    \"nc:Vehicle\": {\n      \"description\": \"A conveyance designed to carry an operator, passengers and/or cargo, over land.\",\n      \"oneOf\": [\n        {\n          \"$ref\": \"#/definitions/nc:VehicleType\"\n        },\n        {\n          \"type\": \"array\",\n          \"items\": {\n            \"$ref\": \"#/definitions/nc:VehicleType\"\n          }\n        }\n      ]\n    },\n    \"nc:VehicleAxleQuantity\": {\n      \"description\": \"A count of common axles of rotation of one or more wheels of a vehicle, whether power driven or freely rotating.\",\n      \"oneOf\": [\n        {\n          \"$ref\": \"#/definitions/niem-xs:nonNegativeInteger\"\n        },\n        {\n          \"type\": \"array\",\n          \"items\": {\n            \"$ref\": \"#/definitions/niem-xs:nonNegativeInteger\"\n          }\n        }\n      ]\n    },\n    \"nc:VehicleMSRPAmount\": {\n      \"description\": \"A manufacturer's suggested retail price of a vehicle; a price at which a manufacturer recommends a vehicle be sold.\",\n      \"oneOf\": [\n        {\n          \"$ref\": \"#/definitions/nc:AmountType\"\n        },\n        {\n          \"type\": \"array\",\n          \"items\": {\n            \"$ref\": \"#/definitions/nc:AmountType\"\n          }\n        }\n      ]\n    },\n    \"nc:Amount\": {\n      \"description\": \"An amount of money.\",\n      \"oneOf\": [\n        {\n          \"$ref\": \"#/definitions/niem-xs:decimal\"\n        },\n        {\n          \"type\": \"array\",\n          \"items\": {\n            \"$ref\": \"#/definitions/niem-xs:decimal\"\n          }\n        }\n      ]\n    },\n    \"nc:Currency\": {\n      \"description\": \"A data concept for a unit of money or exchange.\",\n      \"oneOf\": [\n        {\n          \"anyOf\": [\n            {\n              \"$ref\": \"#/properties/nc:CurrencyCode\"\n            }\n          ]\n        },\n        {\n          \"type\": \"array\",\n          \"items\": {\n            \"anyOf\": [\n              {\n                \"$ref\": \"#/properties/nc:CurrencyCode\"\n              }\n            ]\n          }\n        }\n      ]\n    },\n    \"nc:CurrencyCode\": {\n      \"description\": \"A unit of money or exchange.\",\n      \"oneOf\": [\n        {\n          \"$ref\": \"#/definitions/iso_4217:CurrencyCodeType\"\n        },\n        {\n          \"type\": \"array\",\n          \"items\": {\n            \"$ref\": \"#/definitions/iso_4217:CurrencyCodeType\"\n          }\n        }\n      ]\n    },\n    \"nc:VehicleIdentification\": {\n      \"description\": \"A unique identification for a specific vehicle.\",\n      \"oneOf\": [\n        {\n          \"$ref\": \"#/definitions/nc:IdentificationType\"\n        },\n        {\n          \"type\": \"array\",\n          \"items\": {\n            \"$ref\": \"#/definitions/nc:IdentificationType\"\n          }\n        }\n      ]\n    },\n    \"nc:IdentificationID\": {\n      \"description\": \"An identifier.\",\n      \"oneOf\": [\n        {\n          \"$ref\": \"#/definitions/niem-xs:string\"\n        },\n        {\n          \"type\": \"array\",\n          \"items\": {\n            \"$ref\": \"#/definitions/niem-xs:string\"\n          }\n        }\n      ]\n    }\n  },\n  \"definitions\": {\n    \"nc:VehicleType\": {\n      \"description\": \"A data type for a conveyance designed to carry an operator, passengers and/or cargo, over land.\",\n      \"allOf\": [\n        {\n          \"$ref\": \"#/definitions/nc:ConveyanceType\"\n        },\n        {\n          \"type\": \"object\",\n          \"properties\": {\n            \"nc:VehicleAxleQuantity\": {\n              \"$ref\": \"#/properties/nc:VehicleAxleQuantity\"\n            },\n            \"nc:VehicleIdentification\": {\n              \"$ref\": \"#/properties/nc:VehicleIdentification\"\n            },\n            \"nc:VehicleMSRPAmount\": {\n              \"$ref\": \"#/properties/nc:VehicleMSRPAmount\"\n            }\n          }\n        }\n      ]\n    },\n    \"nc:ConveyanceType\": {\n      \"description\": \"A data type for a means of transport from place to place.\",\n      \"allOf\": [\n        {\n          \"$ref\": \"#/definitions/_base\"\n        },\n        {\n          \"$ref\": \"#/definitions/nc:ItemType\"\n        },\n        {\n          \"type\": \"object\",\n          \"properties\": {}\n        }\n      ]\n    },\n    \"nc:ItemType\": {\n      \"description\": \"A data type for an article or thing.\",\n      \"allOf\": [\n        {\n          \"$ref\": \"#/definitions/_base\"\n        },\n        {\n          \"type\": \"object\",\n          \"properties\": {}\n        }\n      ]\n    },\n    \"nc:AmountType\": {\n      \"description\": \"A data type for an amount of money.\",\n      \"type\": \"object\",\n      \"properties\": {\n        \"nc:Amount\": {\n          \"$ref\": \"#/properties/nc:Amount\"\n        },\n        \"nc:Currency\": {\n          \"$ref\": \"#/properties/nc:Currency\"\n        }\n      }\n    },\n    \"iso_4217:CurrencyCodeType\": {\n      \"description\": \"A data type for a currency that qualifies a monetary amount.\",\n      \"oneOf\": [\n        {\n          \"$ref\": \"#/definitions/iso_4217:CurrencyCodeSimpleType\"\n        },\n        {\n          \"type\": \"object\",\n          \"properties\": {\n            \"rdf:value\": {\n              \"$ref\": \"#/definitions/iso_4217:CurrencyCodeSimpleType\"\n            }\n          }\n        }\n      ]\n    },\n    \"iso_4217:CurrencyCodeSimpleType\": {\n      \"type\": \"string\",\n      \"description\": \"A data type for a currency that qualifies a monetary amount.\",\n      \"oneOf\": [\n        {\n          \"enum\": [\n            \"EUR\"\n          ],\n          \"description\": \"Euro\"\n        },\n        {\n          \"enum\": [\n            \"GBP\"\n          ],\n          \"description\": \"Pound Sterling\"\n        },\n        {\n          \"enum\": [\n            \"USD\"\n          ],\n          \"description\": \"US Dollar\"\n        }\n      ]\n    },\n    \"nc:IdentificationType\": {\n      \"description\": \"A data type for a representation of an identity.\",\n      \"type\": \"object\",\n      \"properties\": {\n        \"nc:IdentificationID\": {\n          \"$ref\": \"#/properties/nc:IdentificationID\"\n        }\n      }\n    },\n    \"niem-xs:decimal\": {\n      \"description\": \"A data type for arbitrary precision decimal numbers.\",\n      \"type\": \"number\"\n    },\n    \"niem-xs:nonNegativeInteger\": {\n      \"description\": \"A data type for an integer with a minimum value of 0.\",\n      \"type\": \"number\"\n    },\n    \"niem-xs:string\": {\n      \"description\": \"A data type for character strings in XML.\",\n      \"type\": \"string\"\n    },\n    \"_base\": {\n      \"type\": \"object\",\n      \"patternProperties\": {\n        \"^ism:.*\": {\n          \"type\": \"string\"\n        },\n        \"^ntk:.*\": {\n          \"type\": \"string\"\n        }\n      },\n      \"properties\": {\n        \"@id\": {\n          \"format\": \"uriref\"\n        },\n        \"@base\": {\n          \"format\": \"uriref\"\n        }\n      }\n    }\n  }\n}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{SERVICE_REGISTRY_HOST}}/{{SERVICE_REGISTRY_API}}/groups/{{GROUP}}/artifacts",
+					"protocol": "https",
 					"host": [
 						"{{SERVICE_REGISTRY_HOST}}"
 					],

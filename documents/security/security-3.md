@@ -4,7 +4,7 @@
 
    ![SSO installation](../../images/sso-operator-installation-6.png)
 
-2. Switch to **YAML view** then copy the content from [keycloak-internal-db.yaml](manifest/keycloak-internal-db.yaml) file and paste into the editor. And then click on **Create** button.
+2. Switch to **YAML view** then copy the content from [keycloak-internal-db.yaml](../../manifest/keycloak-internal-db.yaml) file and paste into the editor. And then click on **Create** button.
 
    ![SSO installation](../../images/sso-operator-installation-7.png)
 

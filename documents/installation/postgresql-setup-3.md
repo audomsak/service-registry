@@ -8,7 +8,7 @@
 
    ![Deploying PostgreSQL](../../images/postgres-deployment-2.png)
 
-3. Switch to **YAML view**, then copy all content in [postgres.yml](manifest/postgres.yml) (simple cluster) or [postgres-ha.yml](manifest/postgres-ha.yml) (HA and connections pooling cluster) file to the editor. Then click on **Create** button. The operator will create a PostgreSQL database cluster for you.
+3. Switch to **YAML view**, then copy all content in [postgres.yml](../../manifest/postgres.yml) (simple cluster) or [postgres-ha.yml](../../manifest/postgres-ha.yml) (HA and connections pooling cluster) file to the editor. Then click on **Create** button. The operator will create a PostgreSQL database cluster for you.
 
    ![Deploying PostgreSQL](../../images/postgres-deployment-3.png)
 

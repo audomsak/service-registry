@@ -8,7 +8,7 @@
 
    ![Deploying Service Registry](../../images/service-registry-deployment-2.png)
 
-3. Switch to **YAML view**, then copy all content in [apicurio.yml](manifest/apicurio.yml) file to the editor and update **username**, **password**, and **url** from the secret. Then click on **Create** button. The operator will deploy Service Registry for you.
+3. Switch to **YAML view**, then copy all content in [apicurio.yml](../../manifest/apicurio.yml) file to the editor and update **username**, **password**, and **url** from the secret. Then click on **Create** button. The operator will deploy Service Registry for you.
 
    ![Deploying Service Registry](../../images/service-registry-deployment-3.png)
 

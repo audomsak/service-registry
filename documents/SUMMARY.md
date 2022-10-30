@@ -20,7 +20,7 @@
 - [REST API testing using Postman](testing/testing-2.md)
 - [Performance testing using hey](testing/testing-3.md)
 
-## Securing Service Registry
+## Security
 
 - [Securing Service Registry](security/security-0.md)
 
@@ -29,7 +29,10 @@
   - [Deploy Red Hat Single Sign-On](security/security-3.md)
   - [Create Keycloak Realm for Service Registry](security/security-4.md)
 
-- [Configuring Service Registry]
+- [Configuring Service Registry](security/security-5.md)
+  - [Service Registry with HTTPS](security/security-6.md)
+  - [Service Registry without HTTPS (less secure)](security/security-7.md)
+  - [Configuring Service Registry](security/security-8.md)
 
 ## Client Application
 

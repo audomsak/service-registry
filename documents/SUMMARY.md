@@ -1,5 +1,7 @@
 # Summary​
 
+- [Preface](welcome.md)
+
 ## Installation
 
 - [Setting up a project](installation/project-setup.md)

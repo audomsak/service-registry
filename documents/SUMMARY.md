@@ -35,8 +35,14 @@
   - [Configuring Service Registry](security/service-registry-configuration.md)
   - [Enable HTTP Basic Authentication](security/enable-basic-auth.md)
   - [Enable Annonymous Read Access](security/enable-anonymous-access.md)
-  - [Testing secure Service Registry REST API](security/testing-secure-api.md)
+
+- [Testing secure Service Registry REST API](security/testing-secure-api.md)
 
 ## Client Application
 
-- [References](reference.md)
+- [Create SSO Client for Application](client/create-sso-client.md)
+- [Kafka Client Application](client/kafka-client.md)
+
+## Reference
+
+- [CRD References](crd-reference.md)

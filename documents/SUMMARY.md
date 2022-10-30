@@ -36,7 +36,7 @@
   - [Enable HTTP Basic Authentication](security/enable-basic-auth.md)
   - [Enable Annonymous Read Access](security/enable-anonymous-access.md)
 
-- [Testing secure Service Registry REST API](security/testing-secure-api.md)
+- [Testing Secure Service Registry API](security/testing-secure-api.md)
 
 ## Client Application
 

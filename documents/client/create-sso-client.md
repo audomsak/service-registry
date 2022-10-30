@@ -6,7 +6,7 @@ Following these steps to create a new SSO client:
 
 1. Login to SSO web console with admin user.
 
-2. Select the **Registry** realm (or the ream you created in [this section](../security/create-registry-realm.md)), then select **Clients** menu, and then click **Create** button.
+2. Select the **Registry** realm (or the realm you created in [this section](../security/create-registry-realm.md)), then select **Clients** menu, and then click **Create** button.
 
     ![Create SSO client](../../images/sso-client-1.png)
 

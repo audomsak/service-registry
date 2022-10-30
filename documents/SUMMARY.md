@@ -16,6 +16,10 @@
 
 ## Testing
 
+- [Testing Service Registry](testing/testing-1.md)
+- [REST API testing using Postman](testing/testing-2.md)
+- [Performance testing using hey](testing/testing-3.md)
+
 ## Securing Service Registry
 
 ## Client Application

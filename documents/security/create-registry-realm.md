@@ -1,4 +1,4 @@
-# Create Keycloak Realm for Service Registry
+# Create Realm for Service Registry
 
 1. Switch to **Administrator** view then click **Installed Operators** and **Red Hat Single Sign-On Operator**, and click the Keycloak Realm tab, and then **Create KeycloakRealm** button to create a new realm.
 
@@ -9,6 +9,37 @@
 2. Change to **YAML view** then copy the conent in [keycloak-realm.yaml](../../manifest/keycloak-realm.yaml) and past into the editor. Edit the realm name, redirectUris, webOrigins, username, password etc. values as you need. Then click on **Create** button.
 
    > You must customize this KeycloakRealm resource with values suitable for your environment if you are deploying to production i.e. **realm name, redirectUris, webOrigins, username, password** etc. You can also create and manage realms using the Red Hat Single Sign-On web console.
+
+   The configuration in [keycloak-realm.yaml](../../manifest/keycloak-realm.yaml) file will create following resources in SSO/Keycloak:
+
+   **Realm**
+
+   | **ID**       | **Display Name** |
+   |----------|--------------|
+   | registry | Registry     |
+
+   **Role**
+
+   | **Name**     | **Capabilities**                                                                                                                    |
+   |--------------|-------------------------------------------------------------------------------------------------------------------------------------|
+   | sr-admin     | Full access, no restrictions.                                                                                                       |
+   | sr-developer | Create artifacts and configure artifact rules. Cannot modify global rules, perform import/export, or use `/admin`  REST API endpoint. |
+   | sr-readonly  | View and search only. Cannot modify artifacts or rules, perform import/export, or use   `/admin`  REST API endpoint.                  |
+
+   **Client**
+
+   | **Client ID**           | **Description**                                           |
+   |---------------------|-------------------------------------------------------|
+   | registry-client-ui  | Keycloak client used by Service Registry web console. |
+   | registry-client-api | Used by Service Registry API client.                  |
+
+   **User**
+
+   | **Username**       | **Password** | **Role**     |
+   |--------------------|--------------|--------------|
+   | registry-admin     | changeme     | sr-admin     |
+   | registry-developer | changeme     | sr-developer |
+   | registry-user      | changeme     | sr-readonly  |
 
    ![Realm setup](../../images/sso-realm-setup-3.png)
 

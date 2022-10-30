@@ -1,6 +1,6 @@
 # Service Registry without HTTPS (Possible but less secure)
 
-By default, Service Registry is installed without HTTPS configured for its Route as a screenshot below. You can **OPTIONALLY** create new or update existing route with HTTPS following the steps in [this section](security-6.md).
+By default, Service Registry is installed without HTTPS configured for its Route as a screenshot below. You can **OPTIONALLY** create new or update existing route with HTTPS following the steps in [this section](service-registry-https.md).
 
 ![Service Registry Authn & Authz](../../images/service-registry-authn-authz-1.png)
 

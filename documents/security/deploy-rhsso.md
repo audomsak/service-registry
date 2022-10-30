@@ -18,7 +18,7 @@
 
 5. Click on the arrow icon of Keyclock pod to open Keyclock web console.
 
-   **Note.** Copy the URL displayed in web browser for later use when configuring Service Registy.
+   **Note.** Copy the URL displayed in web browser for later use when [configuring Service Registy](service-registry-configuration.md).
 
    ![SSO installation](../../images/sso-operator-installation-10.png)
 

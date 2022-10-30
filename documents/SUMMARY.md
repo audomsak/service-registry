@@ -4,35 +4,38 @@
 
 ## Installation
 
-- [Setting up project](installation/project-setup.md)
+- [Setting Up Project](installation/project-setup.md)
 
-- [PostgreSQL database deployment](installation/postgresql-setup-1.md)
-  - [Install Crunchy Postgres for Kubernetes operator](installation/postgresql-setup-2.md)
-  - [Deploy PostgreSQL database](installation/postgresql-setup-3.md)
+- [PostgreSQL Database Deployment](installation/postgresql-db-deployment.md)
+  - [Install Crunchy Postgres for Kubernetes Operator](installation/crunchy-postgres-operator-installation.md)
+  - [Deploy PostgreSQL Database](installation/postgresql-deployment.md)
 
-- [Service Registry deployment](installation/service-registry-setup-1.md)
-  - [Install Service Registry Operator](installation/service-registry-setup-2.md)
-  - [Configuring Service Registry](installation/service-registry-setup-3.md)
+- [Service Registry Deployment](installation/service-registry-deployment.md)
+  - [Install Service Registry Operator](installation/service-registry-operator-installation.md)
+  - [Configuring Service Registry](installation/service-registry-configuration.md)
 
 ## Testing
 
-- [Testing Service Registry](testing/testing-1.md)
-- [REST API testing using Postman](testing/testing-2.md)
-- [Performance testing using hey](testing/testing-3.md)
+- [Testing Service Registry](testing/testing-service-registry.md)
+- [REST API Testing Using Postman](testing/testing-rest-api-postman.md)
+- [Performance Testing Using hey](testing/performance-testing.md)
 
 ## Security
 
-- [Securing Service Registry](security/security-0.md)
+- [Securing Service Registry](security/securing-service-registry.md)
 
-- [Red Hat Single Sign-On deployment](security/security-1.md)
-  - [Installing Red Hat Single Sign-On Operator](security/security-2.md)
-  - [Deploy Red Hat Single Sign-On](security/security-3.md)
-  - [Create Keycloak Realm for Service Registry](security/security-4.md)
+- [Red Hat Single Sign-On Deployment](security/rhsso-deployment.md)
+  - [Installing Red Hat Single Sign-On Operator](security/rhsso-operator-installation.md)
+  - [Deploy Red Hat Single Sign-On](security/deploy-rhsso.md)
+  - [Create Keycloak Realm For Service Registry](security/create-registry-realm.md)
 
-- [Configuring Service Registry](security/security-5.md)
-  - [Service Registry with HTTPS](security/security-6.md)
-  - [Service Registry without HTTPS (less secure)](security/security-7.md)
-  - [Configuring Service Registry](security/security-8.md)
+- [Configuring Service Registry](security/configuring-service-registry.md)
+  - [Service Registry with HTTPS](security/service-registry-https.md)
+  - [Service Registry without HTTPS (less secure)](security/service-registry-http.md)
+  - [Configuring Service Registry](security/service-registry-configuration.md)
+  - [Enable HTTP Basic Authentication](security/enable-basic-auth.md)
+  - [Enable Annonymous Read Access](security/enable-anonymous-access.md)
+  - [Testing secure Service Registry REST API](security/testing-secure-api.md)
 
 ## Client Application
 

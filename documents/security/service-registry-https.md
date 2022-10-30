@@ -2,7 +2,7 @@
 
 By default, Service Registry is installed without HTTPS configured for its Route as a screenshot below. You can create new or update existing route with HTTPS to expose an HTTPS edge-terminated route for connections from outside the OpenShift cluster.
 
-**Note.** In case you've already configured Service Registry route with HTTPS, you can skip below steps and jump to [this section](security-8.md) directly then use the SSO's HTTPS route to configure Service Registry.
+**Note.** In case you've already configured Service Registry route with HTTPS, you can skip below steps and jump to [this section](service-registry-configuration.md) directly then use the SSO's HTTPS route to configure Service Registry.
 
 1. Go to **Networking -> Routes** then click on **Create Route** button.
 

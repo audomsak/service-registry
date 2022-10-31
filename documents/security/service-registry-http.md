@@ -20,6 +20,6 @@ However, if you really don't want to enable HTTPS for Service Registry then you 
 
 - Go to **Networking -> Routes** menu you should be able to see a new HTTP Keycloak Route is automatically created. Then click on the URL link to open Red Hat SSO web console.
 
-   **Note.** Copy the URL displayed in web browser for later use when configuring Service Registy.
+   **Note.** Copy the URL displayed in web browser for later use when [configuring Service Registy](service-registry-configuration.md).
 
    ![Service Registry Authn & Authz](../../images/service-registry-authn-authz-9.png)

@@ -55,6 +55,6 @@
 
    ![Realm setup](../../images/sso-realm-setup-6.png)
 
-5. Select the **Registry** realm (or the realm you've just created above, then click **Users** menu, and then click **View all users** button. You should be able to see a list of users as configured in YAML in the **step 2** above.
+5. Select the **Registry** realm (or the realm you've just created above), then click **Users** menu, and then click **View all users** button. You should be able to see a list of users as configured in YAML in the **step 2** above.
 
    ![Realm setup](../../images/sso-realm-setup-7.png)

@@ -1,6 +1,6 @@
 # Red Hat® Integration - Service Registry
 
-**Red Hat® Integration - Service Registry** is a service that provides an API and schema registry for applications i.e. microservices. Service Registry makes it easy for development teams to publish, discover, and reuse APIs and schemas.
+**Red Hat® Integration - [Service Registry](https://www.redhat.com/en/topics/integration/what-is-a-service-registry)** is a service that provides an API and schema registry for applications i.e. microservices. Service Registry makes it easy for development teams to publish, discover, and reuse APIs and schemas.
 
 Well-defined API and schema definitions are essential to delivering robust microservice and event streaming architectures. Development teams can use a registry to manage these artifacts in various formats, including OpenAPI, AsyncAPI, Apache Avro, Protocol Buffers, and more. Data producers and consumers can then use the artifacts to validate and serialize or deserialize data.
 

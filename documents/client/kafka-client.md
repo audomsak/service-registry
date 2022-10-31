@@ -1,8 +1,8 @@
 # Kafka Client
 
-This section provides a few code snippets to configure Service Registry Kafka serializer/deserializer (SerDes) configuration properties to access the secure Service Registry server.
+This section provides sample code snippets to configure Service Registry Kafka serializer/deserializer (SerDes) configuration properties to access the secure Service Registry server.
 
-Apicurio Registry supports both OAuth and BASIC auth at the same time. a custom authentication handler has been implemented to use OAuth **client_credentials** flow to support BASIC auth. In other words, the client can provide BASIC auth credentials, and the server-side custom handler will extract the username/password and then use OAuth **client_credentials** flow against the Keycloak server to obtain an access token. Once that is done, everything else works the same as if the client had provided an OAuth bearer token to begin with.
+Apicurio Registry supports both OAuth and BASIC auth at the same time. a custom authentication handler has been implemented to use OAuth **Client Credentials** flow to support BASIC auth. In other words, the client can provide BASIC auth credentials, and the server-side custom handler will extract the username/password and then use OAuth **Client Credentials** flow against the Keycloak server to obtain an access token. Once that is done, everything else works the same as if the client had provided an OAuth bearer token to begin with.
 
 Visit [official document](https://www.apicur.io/registry/docs/apicurio-registry/2.3.x/getting-started/assembly-configuring-kafka-client-serdes.html) for detailed information on how to configure Kafka SerDes in your producer and consumer Java client applications.
 

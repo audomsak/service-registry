@@ -12,3 +12,7 @@ This installation guide will show you how to install **Red Hat® Integration - S
 - Crunchy Postgres for Kubernetes operator 5.0.4
 - Red Hat Integration - Service Registry Operator 2.0.4
 - Red Hat Single Sign-On Operator 7.6.0-opr-002
+
+## Git Repository
+
+[Service Registry](https://github.com/audomsak/service-registry) repository on GitHub

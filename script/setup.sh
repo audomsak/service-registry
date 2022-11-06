@@ -235,12 +235,12 @@ echo "==========================================================================
 echo "URLs and credentials"
 echo "=============================================================================================================================="
 echo "Service Registy URL: $serviceRegistryUrl"
-echo "Service Registy Admin Username: registry-admin"
-echo "Service Registy Admin Password: changeme"
+echo "Admin Username: registry-admin"
+echo "Admin Password: changeme"
 echo
 echo "SSO Web Console URL: $keycloakUrl"
-echo "SSO Admin Username: ${keycloakAdminUser}"
-echo "SSO Admin Password: ${keycloakAdminPassword}"
+echo "Admin Username: ${keycloakAdminUser}"
+echo "Admin Password: ${keycloakAdminPassword}"
 echo "=============================================================================================================================="
 echo
 echo "Finished!!"

@@ -7,8 +7,8 @@ spec:
     persistence: sql
     sql:
       dataSource:
-        password:
-        url:
-        userName:
+        password: "DB_PASSWORD"
+        userName: "DB_USERNAME"
+        url: "JDBC_URL"
   deployment:
     replicas: 3

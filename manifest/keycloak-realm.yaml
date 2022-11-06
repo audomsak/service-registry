@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: sso
   realm:
-    displayName: Registry
+    displayName: Service Registry
     enabled: true
     id: registry
     realm: registry
@@ -21,7 +21,7 @@ spec:
       - clientId: registry-client-ui
         implicitFlowEnabled: true
         redirectUris:
-          - '*'
+          - 'SERVICE_REGISTRY_URL/*'
         standardFlowEnabled: true
         webOrigins:
           - '+'
@@ -29,7 +29,7 @@ spec:
       - clientId: registry-client-api
         implicitFlowEnabled: true
         redirectUris:
-          - '*'
+          - 'SERVICE_REGISTRY_URL/*'
         standardFlowEnabled: true
         webOrigins:
           - '+'

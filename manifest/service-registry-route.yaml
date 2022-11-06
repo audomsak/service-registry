@@ -5,7 +5,7 @@ metadata:
   labels:
     app: service-registry
 spec:
-  host: registry-service-registry.apps.cluster-px4pm.px4pm.sandbox441.opentlc.com
+  host: service-registry.apps.CLUSTER_DOMAIN
   to:
     kind: Service
     name: service-registry-service

@@ -48,3 +48,4 @@
 
 - [CRD References](appendix/crd-reference.md)
 - [Installation Helper Script](appendix/installation-helper.md)
+- [Service Registry & SSO Integration with Self-Signed Certificate](appendix/self-signed-cert.md)

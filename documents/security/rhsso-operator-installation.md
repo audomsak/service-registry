@@ -32,3 +32,5 @@
    ![SSO installation](../../images/sso-operator-installation-13.png)
 
    **Note.** The reason we have to downgrade the version is becasue `'redirect_uri'` parameter used for logout is no longer supported in version 7.6 and the application has to change to use the `'post_logout_redirect_uri'` with `'id_token_hint'` parameters instead. However, the current version of Service Registry (to be precise, Apicurio) still uses the `'redirect_uri'` parameter. Even though you can enable backwards compatibility `'legacy-logout-redirect-uri'` option of OIDC login protocol in the Red Hat SSO server (Keycloak) configuration but the configuration attribute in Keycloak CRD is experimental feature and may be changed in the future with or without notice.
+
+   See [official document](https://access.redhat.com/documentation/fr-fr/red_hat_single_sign-on/7.6/html-single/upgrading_guide/index#openid_connect_logout) for more details.

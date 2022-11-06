@@ -30,7 +30,30 @@
 
     ![Testing](../../images/service-registry-authn-authz-23.png)
 
-2. You can optionally go to [jwt.io](https://jwt.io/) website and decode the token returned from SSO. You'll see the `roles` contains only the role you assgined for the client.
+2. For Kafka Java client application, Authorization error should be thrown when the client application is trying to perform any operation that's not allowed for it's role.
+
+    ```log
+    Exception in thread "main" io.apicurio.rest.client.auth.exception.ForbiddenException: Authorization error
+        at io.apicurio.registry.rest.client.impl.ErrorHandler.handleErrorResponse(ErrorHandler.java:57)
+        at io.apicurio.rest.client.handler.BodyHandler.lambda$toSupplierOfType$1(BodyHandler.java:46)
+        at io.apicurio.rest.client.JdkHttpClient.sendRequest(JdkHttpClient.java:204)
+        at io.apicurio.registry.rest.client.impl.RegistryClientImpl.createArtifact(RegistryClientImpl.java:263)
+        at io.apicurio.registry.rest.client.RegistryClient.createArtifact(RegistryClient.java:134)
+        at io.apicurio.registry.resolver.DefaultSchemaResolver.lambda$handleAutoCreateArtifact$2(DefaultSchemaResolver.java:236)
+        at io.apicurio.registry.resolver.ERCache.lambda$getValue$0(ERCache.java:142)
+        at io.apicurio.registry.resolver.ERCache.retry(ERCache.java:181)
+        at io.apicurio.registry.resolver.ERCache.getValue(ERCache.java:141)
+        at io.apicurio.registry.resolver.ERCache.getByContent(ERCache.java:121)
+        at io.apicurio.registry.resolver.DefaultSchemaResolver.handleAutoCreateArtifact(DefaultSchemaResolver.java:234)
+        at io.apicurio.registry.resolver.DefaultSchemaResolver.getSchemaFromRegistry(DefaultSchemaResolver.java:115)
+        at io.apicurio.registry.resolver.DefaultSchemaResolver.resolveSchema(DefaultSchemaResolver.java:88)
+        at io.apicurio.registry.serde.AbstractKafkaSerializer.serialize(AbstractKafkaSerializer.java:83)
+        at org.apache.kafka.clients.producer.KafkaProducer.doSend(KafkaProducer.java:925)
+        at org.apache.kafka.clients.producer.KafkaProducer.send(KafkaProducer.java:885)
+        at org.apache.kafka.clients.producer.KafkaProducer.send(KafkaProducer.java:773)
+    ```
+
+3. You can optionally go to [jwt.io](https://jwt.io/) website and decode the token returned from SSO. You'll see the `roles` contains only the role you assgined for the client.
 
     ![Testing](../../images/service-registry-authn-authz-24.png)
 

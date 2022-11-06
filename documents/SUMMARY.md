@@ -35,6 +35,7 @@
   - [Configuring Service Registry](security/service-registry-configuration.md)
   - [Enable HTTP Basic Authentication](security/enable-basic-auth.md)
   - [Enable Annonymous Read Access](security/enable-anonymous-access.md)
+  - [Enable Role-Based Authorization](security/role-based-authorization.md)
 
 - [Testing Secure Service Registry API](security/testing-secure-api.md)
 
@@ -43,6 +44,7 @@
 - [Create SSO Client for Application](client/create-sso-client.md)
 - [Kafka Client Application](client/kafka-client.md)
 
-## Reference
+## Appendix
 
-- [CRD References](crd-reference.md)
+- [CRD References](appendix/crd-reference.md)
+- [Installation Helper Script](appendix/installation-helper.md)
